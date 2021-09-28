@@ -1,5 +1,5 @@
 //
-//  Map.swift
+//  Map_obj.swift
 //  ObjectMapper
 //
 //  Created by Tristan Himmelman on 2015-10-09.
@@ -35,7 +35,7 @@ public protocol MapContext {
 }
 
 /// A class used for holding mapping data
-public final class Map {
+public final class Map_obj {
 	public let mappingType: MappingType
 	
 	public internal(set) var JSON: [String: Any] = [:]
@@ -60,40 +60,40 @@ public final class Map {
 	
 	/// Sets the current mapper value and key.
 	/// The Key paramater can be a period separated string (ex. "distance.value") to access sub objects.
-	public subscript(key: String) -> Map {
+	public subscript(key: String) -> Map_obj {
 		// save key and value associated to it
 		return self.subscript(key: key)
 	}
 	
-	public subscript(key: String, delimiter delimiter: String) -> Map {
+	public subscript(key: String, delimiter delimiter: String) -> Map_obj {
 		return self.subscript(key: key, delimiter: delimiter)
 	}
 	
-	public subscript(key: String, nested nested: Bool) -> Map {
+	public subscript(key: String, nested nested: Bool) -> Map_obj {
 		return self.subscript(key: key, nested: nested)
 	}
 	
-	public subscript(key: String, nested nested: Bool, delimiter delimiter: String) -> Map {
+	public subscript(key: String, nested nested: Bool, delimiter delimiter: String) -> Map_obj {
 		return self.subscript(key: key, nested: nested, delimiter: delimiter)
 	}
 	
-	public subscript(key: String, ignoreNil ignoreNil: Bool) -> Map {
+	public subscript(key: String, ignoreNil ignoreNil: Bool) -> Map_obj {
 		return self.subscript(key: key, ignoreNil: ignoreNil)
 	}
 	
-	public subscript(key: String, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -> Map {
+	public subscript(key: String, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -> Map_obj {
 		return self.subscript(key: key, delimiter: delimiter, ignoreNil: ignoreNil)
 	}
 	
-	public subscript(key: String, nested nested: Bool, ignoreNil ignoreNil: Bool) -> Map {
+	public subscript(key: String, nested nested: Bool, ignoreNil ignoreNil: Bool) -> Map_obj {
 		return self.subscript(key: key, nested: nested, ignoreNil: ignoreNil)
 	}
 	
-	public subscript(key: String, nested nested: Bool?, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -> Map {
+	public subscript(key: String, nested nested: Bool?, delimiter delimiter: String, ignoreNil ignoreNil: Bool) -> Map_obj {
 		return self.subscript(key: key, nested: nested, delimiter: delimiter, ignoreNil: ignoreNil)
 	}
 	
-	private func `subscript`(key: String, nested: Bool? = nil, delimiter: String = ".", ignoreNil: Bool = false) -> Map {
+	private func `subscript`(key: String, nested: Bool? = nil, delimiter: String = ".", ignoreNil: Bool = false) -> Map_obj {
 		// save key and value associated to it
 		currentKey = key
 		keyIsNested = nested ?? key.contains(delimiter)
@@ -205,7 +205,7 @@ private func valueFor(_ keyPathComponents: ArraySlice<String>, array: [Any]) -> 
 
 // MARK: - Default Value
 
-public extension Map {
+public extension Map_obj {
 
 	/// Returns `default` value if there is nothing to parse.
   func value<T>(_ key: String, default: T.Object, using transform: T) throws -> T.Object where T: TransformType {

@@ -27,13 +27,13 @@
 //  THE SOFTWARE.
 
 public protocol ImmutableMappable: BaseMappable {
-	init(map: Map) throws
+	init(map: Map_obj) throws
 }
 
 public extension ImmutableMappable {
 	
 	/// Implement this method to support object -> JSON transform.
-	func mapping(map: Map) {}
+	func mapping(map: Map_obj) {}
 	
 	/// Initializes object from a JSON String
 	init(JSONString: String, context: MapContext? = nil) throws {
@@ -52,7 +52,7 @@ public extension ImmutableMappable {
 	
 }
 
-public extension Map {
+public extension Map_obj {
 
 	fileprivate func currentValue(for key: String, nested: Bool? = nil, delimiter: String = ".") -> Any? {
 		let isNested = nested ?? key.contains(delimiter)
@@ -343,7 +343,7 @@ public extension Mapper where N: ImmutableMappable {
 internal extension Mapper {
 
 	func mapOrFail(JSON: [String: Any]) throws -> N {
-		let map = Map(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)
+		let map = Map_obj(mappingType: .fromJSON, JSON: JSON, context: context, shouldIncludeNilValues: shouldIncludeNilValues)
 		
 		// Check if object is ImmutableMappable, if so use ImmutableMappable protocol for mapping
 		if let klass = N.self as? ImmutableMappable.Type,
